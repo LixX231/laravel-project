@@ -27,24 +27,21 @@ class MainController extends Controller
         return view('array', ['array' => $this->products]);
     }
 
-    public function shuffleArray(): View
-    {
-        $shuffled = collect($this->products)->shuffle()->values()->all();
-        return view('array', ['array' => $shuffled]);
+    public function shuffleArray() {
+        return view('array', [
+            'array' => collect($this->products)->shuffle()->values()->all()
+        ]);
     }
 
-    public function sortArray(): View
-    {
-        $sorted = collect($this->products)->sortBy('price')->values()->all();
-        return view('array', ['array' => $sorted]);
+    public function sortArray() {
+        return view('array', [
+            'array' => collect($this->products)->sortBy('price')->values()->all()
+        ]);
     }
 
-    public function filterArray(): View
-    {
-        $filtered = collect($this->products)
-            ->filter(fn($p) => $p['price'] > 1000)
-            ->values()
-            ->all();
-        return view('array', ['array' => $filtered]);
+    public function filterArray() {
+        return view('array', [
+            'array' => collect($this->products)->where('price', '>', 1000)->values()->all()
+        ]);
     }
 }
